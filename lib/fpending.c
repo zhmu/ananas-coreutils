@@ -51,6 +51,8 @@ __fpending (FILE *fp)
   return fp->__bufp - fp->__buffer;
 #elif defined EPLAN9                 /* Plan9 */
   return fp->wp - fp->buf;
+#elif defined _PDCLIB_C_VERSION      /* PDCLIB */
+  return fp->bufidx;
 #else
 # error "Please port gnulib fpending.c to your platform!"
   return 1;

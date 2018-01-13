@@ -63,6 +63,10 @@ freadptrinc (FILE *fp, size_t increment)
   fp->__bufp += increment;
 #elif defined EPLAN9                /* Plan9 */
   fp->rp += increment;
+#elif defined _PDCLIB_C_VERSION     /* PDCLIB */
+  while (increment > 0 && fp->ungetidx > 0)
+    fp->ungetidx--, increment--;
+  fp->bufidx += increment;
 #elif defined SLOW_BUT_NO_HACKS     /* users can define this */
 #else
  #error "Please port gnulib freadseek.c to your platform! Look at the definition of getc, getc_unlocked on your system, then report this to bug-gnulib."

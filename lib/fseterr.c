@@ -49,6 +49,8 @@ fseterr (FILE *fp)
 #elif defined EPLAN9                /* Plan9 */
   if (fp->state != 0 /* CLOSED */)
     fp->state = 5 /* ERR */;
+#elif defined _PDCLIB_C_VERSION     /* PDCLIBC */
+  fp->status |= _PDCLIB_ERRORFLAG;
 #elif 0                             /* unknown  */
   /* Portable fallback, based on an idea by Rich Felker.
      Wow! 6 system calls for something that is just a bit operation!

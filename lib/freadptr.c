@@ -111,6 +111,11 @@ freadptr (FILE *fp, size_t *sizep)
     return NULL;
   *sizep = fp->wp - fp->rp;
   return fp->rp;
+#elif defined _PDCLIB_C_VERSION     /* PDCLIBC */
+  if ((fp->status & _PDCLIB_FREAD) == 0)
+    return 0;
+  *sizep = fp->bufend - fp->bufidx;
+	return fp->bufidx;
 #elif defined SLOW_BUT_NO_HACKS     /* users can define this */
   /* This implementation is correct on any ANSI C platform.  It is just
      awfully slow.  */

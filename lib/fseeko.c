@@ -106,6 +106,8 @@ fseeko (FILE *fp, off_t offset, int whence)
      If this assumption is incorrect, please report the bug to
      bug-gnulib.  */
   if (0)
+#elif defined _PDCLIB_C_VERSION     /* PDCLIB */
+  if (fp->bufidx == 0)
 #else
   #error "Please port gnulib fseeko.c to your platform! Look at the code in fseeko.c, then report this to bug-gnulib."
 #endif

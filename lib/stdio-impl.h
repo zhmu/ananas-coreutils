@@ -28,6 +28,11 @@
 
 #include <errno.h>                             /* For detecting Plan9.  */
 
+#if defined _PDCLIB_C_VERSION			/* PDCLIBC */
+/* Pull in the appropriate header file so we have the definition of FILE */
+# include "_PDCLIB_io.h"
+#endif
+
 #if defined __sferror || defined __DragonFly__ || defined __ANDROID__
   /* FreeBSD, NetBSD, OpenBSD, DragonFly, Mac OS X, Cygwin, Minix 3, Android */
 

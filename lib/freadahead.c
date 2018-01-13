@@ -90,6 +90,10 @@ freadahead (FILE *fp)
   if (fp->state == 4 /* WR */ || fp->rp >= fp->wp)
     return 0;
   return fp->wp - fp->rp;
+#elif defined _PDCLIB_C_VERSION     /* PDCLIBC */
+  if ((fp->status & _PDCLIB_FREAD) == 0)
+    return 0;
+  return fp->bufend - fp->bufidx;
 #elif defined SLOW_BUT_NO_HACKS     /* users can define this */
   abort ();
   return 0;
