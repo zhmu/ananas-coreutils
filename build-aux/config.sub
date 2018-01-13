@@ -1563,6 +1563,8 @@ case $os in
 		;;
 	-ios)
 		;;
+	-ananas*)
+		;;
 	-none)
 		;;
 	*)
